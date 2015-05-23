@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @ComponentScan(basePackages = { "com.shoppe" })
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = { "com.shoppe" })
 @EnableTransactionManagement
 public class PersistenceConfig {
 
