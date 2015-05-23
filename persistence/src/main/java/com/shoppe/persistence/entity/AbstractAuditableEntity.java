@@ -75,4 +75,5 @@ public class AbstractAuditableEntity extends AbstractPersistable<Long> {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 	
+
 }

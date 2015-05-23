@@ -6,13 +6,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>shoppe</name>
+	<description>shoppe</description>
 	<modules>
-		<module>web</module>
-		<module>persistence</module>
-		<module>service</module>
 		<module>ws</module>
+		<module>web</module>
+		<module>service</module>
+		<module>persistence</module>
 	</modules>
-
 	<properties>
 		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
