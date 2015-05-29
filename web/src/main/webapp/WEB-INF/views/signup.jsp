@@ -6,7 +6,7 @@
   background: #eceeee;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 257px;
+  height: 550px;
   margin: 20px auto 0;
   width: 298px;
 }
@@ -76,42 +76,21 @@ input[type="submit"]:active {
   top:3px;
   box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #31524d, 0px 5px 3px #999;
 }
-
-.signup {
-  height: 257px;
-  margin: 20px auto 0;
-  width: 298px;
-}
-
-.signup h1 {
-  background-image: linear-gradient(top, #f1f3f3, #d4dae0);
-  box-sizing: border-box;
-  color: #727678;
-  display: block;
-  height: 43px;
-  font: 600 14px/1 'Open Sans', sans-serif;
-  padding-top: 14px;
-  margin: 0;
-  text-align: center;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.2), 0 1px 0 #fff;
-}
 </style>
-<title>Home</title>
+<title>SignUp</title>
 </head>
 <body>
 	<div class="login">
-		<form action="/login" method="post">
-			<h1>Sign In</h1>
-			<input type="text" placeholder="userName" name="userName">
-			<input type="password" placeholder="Password" name="password">
-			<input type="submit" value="login" />
-		</form>
-	</div>
-	<div class="signup">
-		<form action="/newUser" method="post">  
+		<form action="/signup" method="post">  
 				<h1>New User?? Kindly Sign Up!</h1>
+				<input type="text" placeholder="userName" name="userName">
+				<input type="password" placeholder="Password" name="password">
+				<input type="text" placeholder="firstName" name="firstName">
+				<input type="text" placeholder="lastName" name="lastName">
+				<input type="text" placeholder="contactNum" name="contactNum">
+				<input type="text" placeholder="address" name="address">
 				<input type="submit" value="Sign Up"/>  
-		</form>
+			</form>
 	</div>
 </body>
 </html>

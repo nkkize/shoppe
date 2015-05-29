@@ -12,38 +12,60 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shoppe.persistence.entity.User;
 import com.shoppe.service.base.UserService;
+import com.shoppe.service.util.UserUtil;
 
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	private UserService userService;
-	
-	  @RequestMapping("/welcome")
-	  public ModelAndView home(HttpServletRequest request, HttpServletResponse res) {
-			  return new ModelAndView("login");
-	  }
-	  
-	  @RequestMapping("/login")
-	  public ModelAndView login(HttpServletRequest request, HttpServletResponse res) {
-		  String name = request.getParameter("name");
-		  String password = request.getParameter("password");
-		  String message = "Login failed";
-		  if(name.equalsIgnoreCase("narender")){
-			  message = "Login successful";
-			  return new ModelAndView("home", "message", message);
-		  }
-		  else{
-			  return new ModelAndView("error","message",message);
-		  }
-	  }
-	  
-	  @RequestMapping("users")
-	  public ModelAndView getUsers(HttpServletRequest request, HttpServletResponse response){
-		  List<User> list = userService.getUser();
-		  String message = list.toString();
-		  return new ModelAndView("users", "message", message);
-		  
-	  }
+
+	@Autowired
+	private UserUtil userUtil;
+
+	@RequestMapping("/shoppe")
+	public ModelAndView welcome(HttpServletRequest request, HttpServletResponse res) {
+		return new ModelAndView("home");
+	}
+
+	@RequestMapping("/login")
+	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse res) {
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+		String message = "Login failed";
+		User user = userService.findUser(userName);
+		if (userName.equalsIgnoreCase(user.getUserName()) && password.equals(user.getPassword())) {
+			message = "Login successful";
+			return new ModelAndView("users", "message", message);
+		} else {
+			return new ModelAndView("error", "message", message);
+		}
+	}
+
+	@RequestMapping("/newUser")
+	public ModelAndView signUp(HttpServletRequest request, HttpServletResponse res) {
+		return new ModelAndView("signup");
+	}
+
+	@RequestMapping("/signup")
+	public ModelAndView doSignUp(HttpServletRequest request, HttpServletResponse res) {
+		User user = userUtil.reuestToUser(request);
+		User savedUser = userService.saveNewUser(user);
+		String message = "Sign Up Successful";
+		if (savedUser.equals(null)) {
+			message = "Sign Up failed";
+			return new ModelAndView("error", "message", message);
+		} else {
+			return new ModelAndView("users", "message", message);
+		}
+	}
+
+	@RequestMapping("/report")
+	public ModelAndView getUsers(HttpServletRequest request, HttpServletResponse response) {
+		List<User> list = userService.getUsers();
+		String message = list.toString();
+		return new ModelAndView("report", "message", message);
+
+	}
 
 }

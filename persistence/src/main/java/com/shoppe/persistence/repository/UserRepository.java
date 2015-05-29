@@ -15,5 +15,7 @@ import com.shoppe.persistence.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	
 	Logger logger = LoggerFactory.getLogger(UserRepository.class);
+
+	User findByUserName(String userName);
 	
 }

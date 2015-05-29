@@ -13,6 +13,8 @@ import com.shoppe.persistence.entity.*;
 @Component
 public interface UserService {
 	
-	List<User> getUser();
+	public List<User> getUsers();
+	public User findUser(String userName);
+	public User saveNewUser(User user);
 
 }

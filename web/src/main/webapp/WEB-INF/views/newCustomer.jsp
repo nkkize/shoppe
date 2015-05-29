@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style type="text/css">
 .login {
   background: #eceeee;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 257px;
+  height: 400px;
   margin: 20px auto 0;
   width: 298px;
 }
@@ -76,41 +79,18 @@ input[type="submit"]:active {
   top:3px;
   box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #31524d, 0px 5px 3px #999;
 }
-
-.signup {
-  height: 257px;
-  margin: 20px auto 0;
-  width: 298px;
-}
-
-.signup h1 {
-  background-image: linear-gradient(top, #f1f3f3, #d4dae0);
-  box-sizing: border-box;
-  color: #727678;
-  display: block;
-  height: 43px;
-  font: 600 14px/1 'Open Sans', sans-serif;
-  padding-top: 14px;
-  margin: 0;
-  text-align: center;
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.2), 0 1px 0 #fff;
-}
 </style>
-<title>Home</title>
+<title>Add entities</title>
 </head>
 <body>
 	<div class="login">
-		<form action="/login" method="post">
-			<h1>Sign In</h1>
-			<input type="text" placeholder="userName" name="userName">
-			<input type="password" placeholder="Password" name="password">
-			<input type="submit" value="login" />
-		</form>
-	</div>
-	<div class="signup">
-		<form action="/newUser" method="post">  
-				<h1>New User?? Kindly Sign Up!</h1>
-				<input type="submit" value="Sign Up"/>  
+	<h1>To add a new Customer kindly fill following form</h1>
+		<form action="/addCustomer" method="post">
+			<input type="text" placeholder="First Name" name="firstName">
+			<input type="text" placeholder="Last Name" name="lastName"> <input
+				type="text" placeholder="Telephone/Mobile No" name="contactNum"> <input
+				type="text" placeholder="Address" name="address"> <input
+				type="submit" value="Add New Customer" />
 		</form>
 	</div>
 </body>
