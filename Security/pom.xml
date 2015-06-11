@@ -6,8 +6,9 @@
 		<artifactId>shoppe</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>service</artifactId>
-	<name>service</name>
+	<artifactId>Security</artifactId>
+	<name>security</name>
+	<description>security</description>
 	<build>
 		<plugins>
 			<plugin>
@@ -19,37 +20,31 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
-
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>com.shoppe</groupId>
 			<artifactId>persistence</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
 		</dependency>
+
 		<!-- Javax Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
