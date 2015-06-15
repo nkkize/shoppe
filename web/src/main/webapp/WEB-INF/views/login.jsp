@@ -100,7 +100,7 @@ input[type="submit"]:active {
 </head>
 <body>
 	<div class="login">
-		<form action="/user" method="post">
+		<form action="/j_spring_security_check" method="post">
 			<h1>Sign In</h1>
 			<input type="text" placeholder="userName" name="userName">
 			<input type="password" placeholder="Password" name="password">

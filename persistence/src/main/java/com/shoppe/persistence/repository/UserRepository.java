@@ -16,6 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	Logger logger = LoggerFactory.getLogger(UserRepository.class);
 
-	User findByUserName(String userName);
+	User findByUsername(String userName);
 	
 }

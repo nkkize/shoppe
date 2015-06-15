@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shoppe.persistence.entity.User;
@@ -23,14 +24,18 @@ public class LoginController {
 	@Autowired
 	private UserUtil userUtil;
 
-	/*@RequestMapping("/home")
-	public ModelAndView welcome(HttpServletRequest request, HttpServletResponse res) {
-		return new ModelAndView("login");
-	}*/
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public ModelAndView adminPage() { 
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "Spring Security Hello World");
+		model.addObject("message", "This is protected page - Admin Page!");
+		model.setViewName("admin"); 
+		return model;	
+	}
 
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse res) {
-		/*String userName = request.getParameter("userName");
+		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String message = "Login failed";
 		User user = userService.findUser(userName);
@@ -39,7 +44,16 @@ public class LoginController {
 			return new ModelAndView("users", "message", message);
 		} else {
 			return new ModelAndView("error", "message", message);
-		}*/
+		}
+	}*/
+	
+	@RequestMapping(value = "/home")
+	public String logout() {
+		return "home";
+	}
+	
+	@RequestMapping("/login")
+	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse res) {
 		return new ModelAndView("login");
 	}
 

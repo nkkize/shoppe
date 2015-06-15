@@ -10,7 +10,7 @@
 
 Home page
 
-<a href="/home">login or signUp</a>
+<a href="/shoppe">login or signUp</a>
 
 </body>
 </html>

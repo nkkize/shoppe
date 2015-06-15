@@ -26,7 +26,7 @@ public class UserUtil {
 		String address = request.getParameter("address");
 		
 		User user = new User();
-		user.setUserName(userName);
+		user.setUsername(userName);
 		user.setPassword(password);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
