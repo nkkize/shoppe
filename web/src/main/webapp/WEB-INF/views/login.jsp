@@ -100,7 +100,7 @@ input[type="submit"]:active {
 </head>
 <body>
 	<div class="login">
-		<form action="/login" method="post">
+		<form action="/user" method="post">
 			<h1>Sign In</h1>
 			<input type="text" placeholder="userName" name="userName">
 			<input type="password" placeholder="Password" name="password">

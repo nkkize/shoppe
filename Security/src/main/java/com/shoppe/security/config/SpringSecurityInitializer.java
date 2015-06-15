@@ -22,4 +22,5 @@ public class SpringSecurityInitializer extends AbstractSecurityWebApplicationIni
 	 * 		<url-pattern>/*</url-pattern>
 	 * </filter-mapping>
 	 **/
+	
 }

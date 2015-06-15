@@ -23,14 +23,14 @@ public class LoginController {
 	@Autowired
 	private UserUtil userUtil;
 
-	@RequestMapping("/shoppe")
+	/*@RequestMapping("/home")
 	public ModelAndView welcome(HttpServletRequest request, HttpServletResponse res) {
-		return new ModelAndView("home");
-	}
+		return new ModelAndView("login");
+	}*/
 
 	@RequestMapping("/login")
 	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse res) {
-		String userName = request.getParameter("userName");
+		/*String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String message = "Login failed";
 		User user = userService.findUser(userName);
@@ -39,7 +39,8 @@ public class LoginController {
 			return new ModelAndView("users", "message", message);
 		} else {
 			return new ModelAndView("error", "message", message);
-		}
+		}*/
+		return new ModelAndView("login");
 	}
 
 	@RequestMapping("/newUser")
