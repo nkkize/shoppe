@@ -24,12 +24,10 @@ public class LoginController {
 	@Autowired
 	private UserUtil userUtil;
 
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ModelAndView adminPage() { 
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Hello World");
-		model.addObject("message", "This is protected page - Admin Page!");
-		model.setViewName("admin"); 
+		model.setViewName("users"); 
 		return model;	
 	}
 
@@ -47,14 +45,18 @@ public class LoginController {
 		}
 	}*/
 	
-	@RequestMapping(value = "/home")
-	public String logout() {
-		return "home";
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String renderLogin(HttpServletRequest request, HttpServletResponse res) {
+		return "login";
 	}
 	
-	@RequestMapping("/login")
-	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse res) {
-		return new ModelAndView("login");
+	@RequestMapping(value = "/403")
+	public ModelAndView doError(HttpServletRequest request, HttpServletResponse res) {
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "can't access protected area");
+		model.addObject("message", "You are not authorized to access the protected area!!");
+		model.setViewName("admin"); 
+		return model;
 	}
 
 	@RequestMapping("/newUser")

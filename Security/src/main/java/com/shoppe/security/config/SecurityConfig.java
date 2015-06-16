@@ -9,9 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author NarenderK
@@ -68,30 +71,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	  <csrf/>
 	  </http>*/
 
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web
+        .ignoring()
+            .antMatchers("/js/**","/css/**","/img/**","/webjars/**","/views/**");
+	}
 	
 	// .csrf() is optional, enabled by default, if using WebSecurityConfigurerAdapter constructor
 		@Override
 	protected void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests()
-            .anyRequest().authenticated()
-            .and().formLogin()
-			.loginPage("/login").permitAll()
-			.defaultSuccessUrl("/admin")
+			http
+            // access-denied-page: this is the page users will be
+            // redirected to when they try to access protected areas.
+			.authorizeRequests()
+			.anyRequest().authenticated()
+            .and()
+			.formLogin().loginPage("/login")
+			.defaultSuccessUrl("/users")
 			.failureUrl("/login?error")
-			.usernameParameter("userName")
-			.passwordParameter("password")
+			.usernameParameter("username")
+			.passwordParameter("password").permitAll()
 			.and().logout().logoutSuccessUrl("/login?logout")
-			.and().csrf()
 			.and().exceptionHandling().accessDeniedPage("/403");
             
 		}
-		
-		
-		
 	 
 		@Autowired
 		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(userDetailsService);
+			auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		}
+
+
+
+		@Autowired
+		private PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
 		}
 
 }

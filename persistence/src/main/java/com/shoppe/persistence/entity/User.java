@@ -3,12 +3,11 @@
  */
 package com.shoppe.persistence.entity;
 
-import java.util.Collection;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * @author hungrymind
@@ -16,121 +15,113 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @SuppressWarnings("serial")
 @Entity
-public class User extends AbstractAuditableEntity implements UserDetails{
+public class User extends AbstractAuditableEntity {
 	
+	@Column(name = "username", unique = true, nullable = false, length = 50)
 	private String username;
+	
+	@Column(name = "password", nullable = false, length = 50)
 	private String password;
+	
+	@Column(name = "enabled", nullable = false)
+	private boolean enabled;
+	
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
+	
+	@Column(name = "last_name")
 	private String lastName;
+	
+	@Column(name = "contact_num")
 	private Long contactNum;
+	
+	@Column(name = "address")
 	private String address;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="user_role", nullable=true)
+    private UserRole userRole;
 
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
+	public User() {
 	}
 
-	/**
-	 * @param firstName
-	 *            the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public User(String username, String password, boolean enabled) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
 	}
 
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
+	public User(String username, String password, boolean enabled,
+			UserRole userRole) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.userRole = userRole;
 	}
 
-	/**
-	 * @param lastName
-	 *            the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the contactNum
-	 */
-	public Long getContactNum() {
-		return contactNum;
-	}
-
-	/**
-	 * @param contactNum the contactNum to set
-	 */
-	public void setContactNum(Long contactNum) {
-		this.contactNum = contactNum;
-	}
-
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return username;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return password;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Long getContactNum() {
+		return contactNum;
+	}
+
+	public void setContactNum(Long contactNum) {
+		this.contactNum = contactNum;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
+	
 }
