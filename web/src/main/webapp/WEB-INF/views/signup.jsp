@@ -6,7 +6,7 @@
   background: #eceeee;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 550px;
+  height: 620px;
   margin: 20px auto 0;
   width: 298px;
 }
@@ -24,7 +24,7 @@
   text-align: center;
   text-shadow: 0 -1px 0 rgba(0,0,0,0.2), 0 1px 0 #fff;
 }
-input[type="password"], input[type="text"] {
+input[type="password"], input[type="text"], select {
   background: url('http://i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
   border: 1px solid #a1a3a3;
   border-radius: 4px;
@@ -83,8 +83,12 @@ input[type="submit"]:active {
 	<div class="login">
 		<form action="/signup" method="post">  
 				<h1>New User?? Kindly Sign Up!</h1>
-				<input type="text" placeholder="userName" name="userName">
+				<input type="text" placeholder="username" name="username">
 				<input type="password" placeholder="Password" name="password">
+				 <select name = "role">
+					  <option value="user">User</option>
+					  <option value="saab">Admin</option>
+				 </select> 
 				<input type="text" placeholder="firstName" name="firstName">
 				<input type="text" placeholder="lastName" name="lastName">
 				<input type="text" placeholder="contactNum" name="contactNum">

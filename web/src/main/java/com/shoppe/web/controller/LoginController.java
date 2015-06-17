@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shoppe.persistence.entity.User;
@@ -24,30 +25,25 @@ public class LoginController {
 	@Autowired
 	private UserUtil userUtil;
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public ModelAndView adminPage() { 
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView loginSuccess(HttpServletRequest request, HttpServletResponse res) { 
 		ModelAndView model = new ModelAndView();
-		model.setViewName("users"); 
-		return model;	
+		model.setViewName("home"); 
+		return model;
 	}
 
-	/*@RequestMapping("/login")
-	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse res) {
-		String userName = request.getParameter("userName");
-		String password = request.getParameter("password");
-		String message = "Login failed";
-		User user = userService.findUser(userName);
-		if (userName.equalsIgnoreCase(user.getUserName()) && password.equals(user.getPassword())) {
-			message = "Login successful";
-			return new ModelAndView("users", "message", message);
-		} else {
-			return new ModelAndView("error", "message", message);
-		}
-	}*/
-	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String renderLogin(HttpServletRequest request, HttpServletResponse res) {
-		return "login";
+	public ModelAndView  renderLogin(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
+		}
+		if (logout != null) {
+			model.addObject("msg", "You've been logged out successfully.");
+		}
+		model.setViewName("login");
+		return model;
 	}
 	
 	@RequestMapping(value = "/403")
@@ -68,12 +64,16 @@ public class LoginController {
 	public ModelAndView doSignUp(HttpServletRequest request, HttpServletResponse res) {
 		User user = userUtil.reuestToUser(request);
 		User savedUser = userService.saveNewUser(user);
-		String message = "Sign Up Successful";
+		ModelAndView model = new ModelAndView();
+		model.setViewName("admin"); 
 		if (savedUser.equals(null)) {
-			message = "Sign Up failed";
-			return new ModelAndView("error", "message", message);
+			model.addObject("title", "Sign Up failed");
+			model.addObject("message", "Sign Up failed!!");
+			return model;
 		} else {
-			return new ModelAndView("users", "message", message);
+			model.addObject("title", "Sign Up Successful");
+			model.addObject("message", "Sign Up Successful!!");
+			return model;
 		}
 	}
 

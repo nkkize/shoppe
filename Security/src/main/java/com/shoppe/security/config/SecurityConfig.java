@@ -71,12 +71,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	  <csrf/>
 	  </http>*/
 
-	@Override
+	/*@Override
 	public void configure(WebSecurity web) throws Exception {
 		web
         .ignoring()
             .antMatchers("/js/**","/css/**","/img/**","/webjars/**","/views/**");
-	}
+	}*/
 	
 	// .csrf() is optional, enabled by default, if using WebSecurityConfigurerAdapter constructor
 		@Override
@@ -84,17 +84,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			http
             // access-denied-page: this is the page users will be
             // redirected to when they try to access protected areas.
+			.formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/home")
+				.failureUrl("/login?error")
+				.usernameParameter("username")
+				.passwordParameter("password").permitAll()
+				.and()
 			.authorizeRequests()
-			.anyRequest().authenticated()
-            .and()
-			.formLogin().loginPage("/login")
-			.defaultSuccessUrl("/users")
-			.failureUrl("/login?error")
-			.usernameParameter("username")
-			.passwordParameter("password").permitAll()
-			.and().logout().logoutSuccessUrl("/login?logout")
-			.and().exceptionHandling().accessDeniedPage("/403");
-            
+				.antMatchers("/newUser", "/signup").permitAll()
+				.anyRequest().authenticated()
+				.and()
+				.csrf().disable();            
 		}
 	 
 		@Autowired
@@ -102,7 +103,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 		}
 
-
+		/*.and()
+		.logout()
+		.logoutSuccessUrl("/login?logout")
+		
+		
+				.anyRequest().authenticated()*/
 
 		@Autowired
 		private PasswordEncoder passwordEncoder() {

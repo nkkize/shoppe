@@ -17,7 +17,7 @@ import com.shoppe.persistence.entity.User;
 public class UserUtil {
 
 	public User reuestToUser(HttpServletRequest request) {
-		String userName = request.getParameter("userName");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -26,7 +26,7 @@ public class UserUtil {
 		String address = request.getParameter("address");
 		
 		User user = new User();
-		user.setUsername(userName);
+		user.setUsername(username);
 		user.setPassword(password);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);

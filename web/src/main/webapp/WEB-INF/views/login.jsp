@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
 <html lang="en">
 <head>
 <style type="text/css">
@@ -6,11 +8,11 @@
   background: #eceeee;
   border: 1px solid #42464b;
   border-radius: 6px;
-  height: 257px;
+  height: 300px;
   margin: 20px auto 0;
   width: 298px;
 }
-.login h1 {
+.login h1{
   background-image: linear-gradient(top, #f1f3f3, #d4dae0);
   border-bottom: 1px solid #a6abaf;
   border-radius: 6px 6px 0 0;
@@ -18,6 +20,18 @@
   color: #727678;
   display: block;
   height: 43px;
+  font: 600 14px/1 'Open Sans', sans-serif;
+  padding-top: 14px;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2), 0 1px 0 #fff;
+}
+h2{
+  background-image: linear-gradient(top, #f1f3f3, #d4dae0);  
+  box-sizing: border-box;
+  color: #FF0000;
+  display: block;
+  height: 20px;
   font: 600 14px/1 'Open Sans', sans-serif;
   padding-top: 14px;
   margin: 0;
@@ -98,11 +112,14 @@ input[type="submit"]:active {
 </style>
 <title>Home</title>
 </head>
-<body>
+<body onload='document.loginForm.username.focus();'>
 	<div class="login">
-		<form  action="/login" method="POST">
+		<c:if test="${not empty error}">
+			<div class="error"><h2>${error}</h2></div>
+		</c:if>		
+		<form  name = "loginForm" action="/login" method="POST">
 			<h1>Sign In</h1>
-			<input type="text" placeholder="userName" name="username">
+			<input type="text" placeholder="username" name="username">
 			<input type="password" placeholder="Password" name="password">
 			<input type="submit" value="login" />
 		</form>
@@ -110,7 +127,7 @@ input[type="submit"]:active {
 	<div class="signup">
 		<form action="/newUser" method="post">  
 				<h1>New User?? Kindly Sign Up!</h1>
-				<input type="submit" value="Sign Up"/>  
+				<input type="submit" value="Sign Up"/>
 		</form>
 	</div>
 </body>
